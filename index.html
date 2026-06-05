@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>JSON Toolkit - 在线 JSON 格式化/验证/压缩/转换</title>
-<meta name="description" content="免费在线 JSON 工具：格式化、验证、压缩、转 CSV、转 YAML。本地处理，数据不上传。">
+<title>JSON Toolkit - 在线 JSON Format/Validate/Compress/Convert</title>
+<meta name="description" content="免费在线 JSON 工具：Format、Validate、Compress、转 CSV、转 YAML。Processed locally，数据不Upload。">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0d1117;color:#c9d1d9;min-height:100vh}
@@ -42,7 +42,7 @@ textarea[readonly]{background:#0d1117;cursor:default}
 <header>
   <div class="logo">{ } <span>JSON</span> Toolkit</div>
   <div style="display:flex;gap:12px;align-items:center">
-    <span style="font-size:11px;color:#8b949e">🔒 数据不上传 · 本地处理</span>
+    <span style="font-size:11px;color:#8b949e">🔒 数据不Upload · Processed locally</span>
   </div>
 </header>
 
@@ -50,23 +50,23 @@ textarea[readonly]{background:#0d1117;cursor:default}
   <!-- Input Panel -->
   <div class="panel">
     <div class="panel-header">
-      <span class="panel-title">📥 输入</span>
+      <span class="panel-title">📥 Input</span>
       <span id="input-status"></span>
     </div>
     <div class="actions">
-      <button class="btn btn-primary" onclick="formatJSON()">✨ 格式化</button>
-      <button class="btn" onclick="minifyJSON()">📦 压缩</button>
-      <button class="btn" onclick="validateJSON()">✓ 验证</button>
-      <button class="btn" onclick="escapeJSON()">🔒 转义</button>
-      <button class="btn" onclick="unescapeJSON()">🔓 解义</button>
-      <button class="btn" onclick="sortKeys()">🔤 排序Key</button>
-      <button class="btn" onclick="clearAll()">🗑 清空</button>
+      <button class="btn btn-primary" onclick="formatJSON()">✨ Format</button>
+      <button class="btn" onclick="minifyJSON()">📦 Compress</button>
+      <button class="btn" onclick="validateJSON()">✓ Validate</button>
+      <button class="btn" onclick="escapeJSON()">🔒 Escape</button>
+      <button class="btn" onclick="unescapeJSON()">🔓 Unescape</button>
+      <button class="btn" onclick="sortKeys()">🔤 Sort Keys</button>
+      <button class="btn" onclick="clearAll()">🗑 Clear</button>
     </div>
     <div class="actions">
       <button class="btn" onclick="jsonToCSV()">📊 JSON→CSV</button>
       <button class="btn" onclick="jsonToYAML()">📄 JSON→YAML</button>
       <button class="btn" onclick="jsonToXML()">📋 JSON→XML</button>
-      <button class="btn" onclick="copyOutput()">📋 复制结果</button>
+      <button class="btn" onclick="copyOutput()">📋 Copy结果</button>
     </div>
     <textarea id="input" placeholder='粘贴 JSON 到这里...&#10;&#10;{"name":"JSON Toolkit","version":"1.0","features":["format","validate","convert"]}'></textarea>
     <div class="stats" id="input-stats"></div>
@@ -75,19 +75,19 @@ textarea[readonly]{background:#0d1117;cursor:default}
   <!-- Output Panel -->
   <div class="panel">
     <div class="panel-header">
-      <span class="panel-title">📤 输出</span>
+      <span class="panel-title">📤 Output</span>
       <span id="output-status"></span>
     </div>
     <div class="actions">
-      <button class="btn btn-primary" onclick="copyOutput()">📋 复制</button>
-      <button class="btn" onclick="downloadOutput()">💾 下载</button>
+      <button class="btn btn-primary" onclick="copyOutput()">📋 Copy</button>
+      <button class="btn" onclick="downloadOutput()">💾 Download</button>
       <button class="btn" onclick="swapPanels()">🔄 交换</button>
     </div>
-    <div id="output">等待输入...</div>
+    <div id="output">等待Input...</div>
     <div class="stats" id="output-stats"></div>
     <div class="pro-banner" id="pro-banner">
       <h3>🚀 需要批量处理？</h3>
-      <p>Pro 版支持文件拖拽、批量转换、历史记录</p>
+      <p>Pro 版支持文件拖拽、批量Convert、HistoryRecords</p>
       <a href="#">即将推出</a>
     </div>
   </div>
@@ -154,7 +154,7 @@ function setOutput(text, type = 'text') {
 
 function setError(msg) {
   output.textContent = '❌ ' + msg;
-  outputStatus.innerHTML = '<span class="status status-err">⚠ 错误</span>';
+  outputStatus.innerHTML = '<span class="status status-err">⚠ Error</span>';
   outputStats.innerHTML = '';
 }
 
@@ -177,12 +177,12 @@ function validateJSON() {
     const obj = getJSON();
     const size = new Blob([input.value]).size;
     const keys = countKeys(obj);
-    setOutput(`✅ 有效的 JSON\n\n类型: ${Array.isArray(obj) ? 'Array' : typeof obj === 'object' ? 'Object' : typeof obj}\n大小: ${formatSize(size)}\n键数: ${keys}\n\n结构预览:\n${JSON.stringify(obj, null, 2).substring(0, 2000)}`);
+    setOutput(`✅ 有效的 JSON\n\n类型: ${Array.isArray(obj) ? 'Array' : typeof obj === 'object' ? 'Object' : typeof obj}\n大小: ${formatSize(size)}\n键数: ${keys}\n\n结构Preview:\n${JSON.stringify(obj, null, 2).substring(0, 2000)}`);
   } catch(e) { setError(e.message); }
 }
 
 function escapeJSON() {
-  if (!input.value.trim()) return setError('请先输入内容');
+  if (!input.value.trim()) return setError('请先Input内容');
   setOutput(JSON.stringify(input.value));
 }
 
@@ -283,7 +283,7 @@ function toXML(obj, tag) {
 
 function clearAll() {
   input.value = '';
-  output.textContent = '等待输入...';
+  output.textContent = '等待Input...';
   inputStatus.innerHTML = '';
   outputStatus.innerHTML = '';
   inputStats.innerHTML = '';
@@ -291,15 +291,15 @@ function clearAll() {
 }
 
 function copyOutput() {
-  if (output.textContent === '等待输入...') return;
+  if (output.textContent === '等待Input...') return;
   navigator.clipboard.writeText(output.textContent).then(() => {
-    outputStatus.innerHTML = '<span class="status status-ok">✓ 已复制</span>';
+    outputStatus.innerHTML = '<span class="status status-ok">✓ 已Copy</span>';
     setTimeout(() => outputStatus.innerHTML = '<span class="status status-ok">✓ 完成</span>', 1500);
   });
 }
 
 function downloadOutput() {
-  if (output.textContent === '等待输入...') return;
+  if (output.textContent === '等待Input...') return;
   const blob = new Blob([output.textContent], {type:'text/plain'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -309,9 +309,9 @@ function downloadOutput() {
 }
 
 function swapPanels() {
-  if (output.textContent === '等待输入...') return;
+  if (output.textContent === '等待Input...') return;
   input.value = output.textContent;
-  output.textContent = '等待输入...';
+  output.textContent = '等待Input...';
   autoValidate();
   inputStatus.innerHTML = '';
   outputStatus.innerHTML = '';
